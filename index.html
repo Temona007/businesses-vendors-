@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Dispatch | Service Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="app">
+    <section id="login-view" class="view active">
+      <div class="login-container">
+        <div class="login-card">
+          <div class="logo">Vendor<span>Dispatch</span></div>
+          <p class="tagline">Service management, simplified</p>
+          <p class="role-hint">Demo: select your role to continue</p>
+          <button class="btn btn-ghost btn-sm reset-demo" id="reset-demo-btn">Reset demo data</button>
+          <div class="role-buttons">
+            <button class="role-btn" data-role="client" data-user="u2">
+              <span class="role-icon">📋</span>
+              <span class="role-label">Client</span>
+              <span class="role-desc">Create & track requests</span>
+            </button>
+            <button class="role-btn" data-role="vendor" data-user="v1">
+              <span class="role-icon">🔧</span>
+              <span class="role-label">Vendor</span>
+              <span class="role-desc">Accept jobs, update status</span>
+            </button>
+            <button class="role-btn" data-role="admin" data-user="u1">
+              <span class="role-icon">⚙️</span>
+              <span class="role-label">Admin</span>
+              <span class="role-desc">Manage users, tickets, payments</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="client-view" class="view">
+      <header class="header">
+        <h1>Client Dashboard</h1>
+        <div class="header-actions">
+          <span class="user-badge" id="client-user-name">Mike Johnson</span>
+          <button class="btn btn-ghost" id="logout-btn">Log out</button>
+        </div>
+      </header>
+      <main class="main">
+        <div class="card">
+          <div class="card-header">
+            <h2>My Service Requests</h2>
+            <button class="btn btn-primary" id="new-ticket-btn">+ New Request</button>
+          </div>
+          <div id="client-tickets" class="ticket-list"></div>
+        </div>
+      </main>
+    </section>
+
+    <section id="vendor-view" class="view">
+      <header class="header">
+        <h1>Vendor Dashboard</h1>
+        <div class="header-actions">
+          <span class="user-badge" id="vendor-user-name">Pro Plumbing LLC</span>
+          <button class="btn btn-ghost" id="vendor-logout-btn">Log out</button>
+        </div>
+      </header>
+      <main class="main">
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card-header"><h2>Assigned Jobs</h2></div>
+            <div id="vendor-assigned" class="ticket-list"></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h2>My Active Jobs</h2></div>
+            <div id="vendor-active" class="ticket-list"></div>
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <section id="admin-view" class="view">
+      <header class="header">
+        <h1>Admin Panel</h1>
+        <div class="header-actions">
+          <span class="user-badge" id="admin-user-name">Sarah Chen</span>
+          <button class="btn btn-ghost" id="admin-logout-btn">Log out</button>
+        </div>
+      </header>
+      <main class="main">
+        <div class="tabs">
+          <button class="tab active" data-tab="tickets">Tickets</button>
+          <button class="tab" data-tab="users">Users</button>
+          <button class="tab" data-tab="payments">Payments</button>
+        </div>
+        <div id="admin-tickets" class="tab-content active">
+          <div class="card"><div id="admin-ticket-list" class="ticket-list"></div></div>
+        </div>
+        <div id="admin-users" class="tab-content">
+          <div class="card"><div id="admin-user-list" class="user-list"></div></div>
+        </div>
+        <div id="admin-payments" class="tab-content">
+          <div class="card"><div id="admin-payment-list" class="payment-list"></div></div>
+        </div>
+      </main>
+    </section>
+  </div>
+
+  <div id="new-ticket-modal" class="modal">
+    <div class="modal-content">
+      <h3>New Service Request</h3>
+      <form id="new-ticket-form">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" name="title" required placeholder="Brief description">
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select name="category">
+            <option value="plumbing">Plumbing</option>
+            <option value="hvac">HVAC</option>
+            <option value="electrical">Electrical</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Priority</label>
+          <select name="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="urgent">Urgent</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <input type="text" name="location" required placeholder="Address or unit">
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" id="cancel-ticket-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dispatch.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
